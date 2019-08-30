@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import MDSpinner from "react-md-spinner";
 import { CometChat } from "@cometchat-pro/chat";
 import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const limit = 30;
@@ -151,42 +150,31 @@ const Chat = ({ user }) => {
 
 
   const handleSubmit = event => {
-    if (file) {
-      sendFile()
-    } else {
-      event.preventDefault();
-      let textMessage = new CometChat.TextMessage(
-        selectedFriend,
-        message,
-        CometChat.MESSAGE_TYPE.TEXT,
-        CometChat.RECEIVER_TYPE.USER
-      );
-      console.log(textMessage);
-      CometChat.sendMessage(textMessage).then(
-        message => {
-          console.log("Message sent successfully:", message);
-          setChat([...chat, message]);
-          scrollToBottom();
-        },
-        error => {
-          console.log("Message sending failed with error:", error);
-        }
-      );
-      setMessage("");
-    }
+
+    event.preventDefault();
+    let textMessage = new CometChat.TextMessage(
+      selectedFriend,
+      message,
+      CometChat.MESSAGE_TYPE.TEXT,
+      CometChat.RECEIVER_TYPE.USER
+    );
+    console.log(textMessage);
+    CometChat.sendMessage(textMessage).then(
+      message => {
+        console.log("Message sent successfully:", message);
+        setChat([...chat, message]);
+        scrollToBottom();
+      },
+      error => {
+        console.log("Message sending failed with error:", error);
+      }
+    );
+    setMessage("");
 
   };
 
-  // const sendTextOrFile = () => {
-  //   // console.log("FOnt Awesome is so cool")
-  //   if (file) {
-  //     sendFile()
-  //   } else {
-  //     handleSubmit()
-  //   }
-  // }
-
   const sendFile = () => {
+    console.log("Send File Called")
     var mediaMessage = new CometChat.MediaMessage(
       selectedFriend,
       file,
@@ -252,7 +240,7 @@ const Chat = ({ user }) => {
               <div
                 className="row bg-light"
                 style={{ bottom: 0, width: "100%" }}>
-                <form className="row1 m-0 p-0 w-100" onSubmit={handleSubmit}>
+                <form className="row1 m-0 p-0 w-100" onSubmit={handleSubmit} >
                   <div className="col-9 m-0 p-1">
                     <input
                       id="text"
@@ -267,22 +255,21 @@ const Chat = ({ user }) => {
                   </div>
                   <div>
                     <span class="btn btn-outline-secondary rounded border w-100 btn-file">
-                      <FontAwesomeIcon icon={faPaperclip} /><input type="file" />
+                      <FontAwesomeIcon
+                        icon={faPaperclip} /><input type="file" id="img_file"
+                          name="img_file"
+                          files={file} onChange={e => {
+                            setFile(e.target.files[0])
+                          }} />
                     </span>
                   </div>
                   <div>
-                    <button className="sfile btn btn-outline-secondary rounded border w-100"
-                      onClick={sendFile}
-                    >
-                      <FontAwesomeIcon icon={faPaperPlane} />
+                    <button type="button" onClick={sendFile} className="sfile btn btn-outline-secondary rounded border w-100"
+                    > Send File
                     </button>
                   </div>
                 </form>
               </div>
-              {/* <div className="">
-                <div className="mt-3">
-                </div>
-              </div> */}
             </div>
           </div>
         </div>

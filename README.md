@@ -1,13 +1,13 @@
 # Build a chat application with file sharing functionality
 Read the full tutorial here:
 [Build a chat application with file sharing functionality](#)
+
 The tutorial shows how to build a chat application with file sharing functionality
 
 ![Login view](https://paper-attachments.dropbox.com/s_5EE93C09700899A0DA0665C0B27F23EF9FAF02DD5C957065369CA608A6523735_1561633732366_Screen+Shot+2019-06-27+at+11.54.13+AM.png)
 
 ![Chat page view](https://paper-attachments.dropbox.com/s_5EE93C09700899A0DA0665C0B27F23EF9FAF02DD5C957065369CA608A6523735_1561633800358_Screen+Shot+2019-06-27+at+12.09.31+PM.png)
 
-## 
 ## Technologies Used
 
 This demo uses:
@@ -40,6 +40,10 @@ To run the demo follow these steps:
 ## npm install or yarn
 
 Installs all the necessary dependencies in the `package.json` file
+
+## Add your CometChat keys to the project
+
+Open the `config.js` file in the `src`directory and update it with your unique keys 
 
 ## npm start
 
