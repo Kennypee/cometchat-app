@@ -44,12 +44,17 @@ body {
   float: right;
   background: #35cce6;
   border-radius: 10px;
+ 
 }
     
 .balon2 {
   float: left;
   background: #f4f7f9;
   border-radius: 10px;
+  
+}
+.img{
+  width: 100%
 }
     
 .login-form {

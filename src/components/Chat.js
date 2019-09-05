@@ -26,7 +26,7 @@ const ChatBox = props => {
                 } p-3 m-1`}
             >
               {chat.type === "text" ? <div>{chat.text}</div> :
-                <img src={chat.file} alt="file" />
+                <img class="img" src={chat.file} alt="chat media" />
               }
             </div>
           </div>
@@ -76,6 +76,7 @@ const Chat = ({ user }) => {
   const [friendisLoading, setFriendisLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [file, setFile] = useState(null)
+  const [placeholder, setPlaceholder] = useState("Type message ...")
 
   useEffect(() => {
     let usersRequest = new CometChat.UsersRequestBuilder()
@@ -250,21 +251,23 @@ const Chat = ({ user }) => {
                         setMessage(event.target.value);
                       }}
                       value={message}
-                      placeholder="Type a message..."
+                      placeholder={placeholder}
                     />
                   </div>
                   <div>
                     <span class="btn btn-outline-secondary rounded border w-100 btn-file">
                       <FontAwesomeIcon
-                        icon={faPaperclip} /><input type="file" id="img_file"
-                          name="img_file"
-                          files={file} onChange={e => {
-                            setFile(e.target.files[0])
-                          }} />
+                        icon={faPaperclip} />
+                      <input type="file" id="img_file"
+                        name="img_file" accept="image/x-png,image/gif,image/jpeg"
+                        files={file} onChange={e => {
+                          setFile(e.target.files[0])
+                          setPlaceholder(e.target.files[0].name)
+                        }} />
                     </span>
                   </div>
                   <div>
-                    <button type="button" onClick={sendFile} className="sfile btn btn-outline-secondary rounded border w-100"
+                    <button disabled={!file} type="button" onClick={sendFile} className="sfile btn btn-outline-secondary rounded border w-100"
                     > Send File
                     </button>
                   </div>
