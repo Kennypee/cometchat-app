@@ -185,7 +185,9 @@ const Chat = ({ user }) => {
     CometChat.sendMediaMessage(mediaMessage).then(
       message => {
         console.log("file sent", message)
+        setPlaceholder("")
         setChat([...chat, message]);
+        scrollToBottom();
       },
       error => {
         return error
